@@ -3,34 +3,439 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Câbles sous-marins et vulnérabilité d'internet</title>
+    <title>SNT - Exposé 2: Internet est-il vulnérable?</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 20px;
         }
-        h1 {
-            color: #333;
+
+        header {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            text-align: center;
         }
-        p {
+
+        header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header .subtitle {
+            color: #764ba2;
+            font-size: 1.3em;
+            font-weight: 300;
+        }
+
+        header .date {
+            color: #999;
+            font-size: 0.9em;
+            margin-top: 15px;
+        }
+
+        .intro {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            border-left: 5px solid #667eea;
+        }
+
+        .intro p {
+            font-size: 1.1em;
             color: #555;
+            margin-bottom: 10px;
         }
-        .container {
-            max-width: 800px;
-            margin: auto;
+
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #764ba2;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+
+        .section ul, .section ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .section li {
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+
+        .consignes {
+            background: #f0f4ff;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .consignes h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .attention {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .attention::before {
+            content: "⚠️ ";
+            font-weight: bold;
+        }
+
+        .ressources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .ressource-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .ressource-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .ressource-card h4 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .ressource-card p {
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .ressource-card a {
+            color: #fff;
+            text-decoration: underline;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .points-cles {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .points-cles h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .points-cles ul {
+            list-style-position: inside;
+        }
+
+        .points-cles li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .points-cles li:last-child {
+            border-bottom: none;
+        }
+
+        footer {
             background: white;
             padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border-radius: 10px;
+            color: #666;
+            font-size: 0.9em;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-contents {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .table-contents h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .table-contents ul {
+            list-style-position: inside;
+        }
+
+        .table-contents a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .table-contents a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            header .subtitle {
+                font-size: 1em;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .section h2 {
+                font-size: 1.5em;
+            }
+
+            .ressources {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Câbles sous-marins et vulnérabilité d'internet</h1>
-        <p>Les câbles sous-marins jouent un rôle crucial dans la connectivité mondiale. Ils transportent plus de 99% des données internationales, reliant des continents entiers.</p>
-        <p>Malgré leur importance, ces infrastructures sont vulnérables à divers dangers, incluant des coupures accidentelles et des actes de sabotage. Comprendre ces risques est essentiel pour assurer un internet résilient.</p>
+        <!-- Header -->
+        <header>
+            <h1>SNT / Exposés / Exposé 2</h1>
+            <p class="subtitle">Internet est-il vulnérable ?</p>
+            <p class="date">Dernière mise à jour le : 12/03/2026</p>
+        </header>
+
+        <!-- Table of Contents -->
+        <div class="table-contents">
+            <h3>📑 Table des matières</h3>
+            <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#consignes">Consignes</a></li>
+                <li><a href="#ressources">Ressources à exploiter</a></li>
+                <li><a href="#preparation">Notes de préparation</a></li>
+                <li><a href="#conseils">Conseils pour la présentation</a></li>
+            </ul>
+        </div>
+
+        <!-- Introduction -->
+        <div class="intro" id="introduction">
+            <p><strong>Crédit :</strong> Greg Mahlknecht, CC BY-SA 2.0, via Wikimedia Commons.</p>
+            <p>Les récentes attaques en mer Baltique, imputées à la Russie de Poutine, rappellent qu'Internet n'a rien d'immatériel. Son infrastructure, basée essentiellement sur des câbles sous-marins, est à la fois une merveille d'ingénierie et mais aussi source de pouvoirs, d'enjeux géopolitiques et militaires.</p>
+        </div>
+
+        <!-- Consignes Section -->
+        <div class="section" id="consignes">
+            <h2>📋 Consignes</h2>
+
+            <div class="consignes">
+                <h4>Format de travail</h4>
+                <p>Vous travaillerez en <strong>trinôme</strong>. Un diaporama est à préparer et une présentation orale d'environ <strong>10 minutes</strong> est attendue.</p>
+            </div>
+
+            <h3>Contenu du diaporama</h3>
+            <p>En vous plaçant dans la peau d'un journaliste, vous devez préparer un diaporama de synthèse à destination d'un public de lycéens.</p>
+
+            <p>Votre travail doit s'appuyer <strong>exclusivement</strong> sur les quatre ressources fournies (à l'exception de définitions très courtes ou de chiffres simples, qui devront être clairement signalés).</p>
+
+            <p>Le diaporama devra présenter de manière <strong>claire, structurée et argumentée</strong>, en croisant les informations issues des différentes sources, les éléments suivants :</p>
+
+            <div class="points-cles">
+                <h4>🎯 Points essentiels à couvrir :</h4>
+                <ul>
+                    <li><strong>L'importance et l'ampleur du réseau de câbles sous-marins</strong>
+                        <ul style="margin-top: 8px; margin-left: 20px;">
+                            <li>Chiffres clés</li>
+                            <li>Rôle fondamental</li>
+                            <li>Fonctionnement technique</li>
+                        </ul>
+                    </li>
+                    <li><strong>La bataille pour le contrôle de l'information</strong>
+                        <ul style="margin-top: 8px; margin-left: 20px;">
+                            <li>Acteurs dominants</li>
+                            <li>Exploitation</li>
+                            <li>Stratégies</li>
+                        </ul>
+                    </li>
+                    <li><strong>Les dangers géopolitiques et sécuritaires</strong>
+                        <ul style="margin-top: 8px; margin-left: 20px;">
+                            <li>Risques</li>
+                            <li>Actes malveillants</li>
+                            <li>Impacts</li>
+                        </ul>
+                    </li>
+                    <li><strong>L'impact environnemental</strong>
+                        <ul style="margin-top: 8px; margin-left: 20px;">
+                            <li>Conséquences écologiques</li>
+                            <li>Durabilité</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="attention">
+                <p><strong>Il ne s'agit ni d'un résumé linéaire des sources, ni d'une juxtaposition de ces dernières. On attend une <u>analyse croisée</u> :</strong></p>
+                <ul style="margin-left: 30px; margin-top: 15px;">
+                    <li>Mise en regard des points de vue (par exemple, entreprises privées vs. États)</li>
+                    <li>Identification des accords et des désaccords sur l'importance stratégique</li>
+                    <li>Hiérarchisation des arguments (par exemple, la primauté des enjeux géopolitiques par rapport à l'impact environnemental)</li>
+                </ul>
+            </div>
+
+            <p style="margin-top: 20px;"><strong>✅ Chaque information importante devra être explicitement rattachée à une source</strong> (par exemple : « selon l'article/l'Ademe… », « d'après le spécialiste des systèmes sous-marins… », « dans la vidéo… »).</p>
+
+            <p style="margin-top: 15px; padding: 15px; background: #ffe6e6; border-left: 4px solid #d32f2f; border-radius: 4px;"><strong>❌ Toute idée, argument ou formulation ne pouvant être reliée clairement à une des ressources fournies ne doit pas apparaître dans le diaporama.</strong></p>
+        </div>
+
+        <!-- Ressources Section -->
+        <div class="section" id="ressources">
+            <h2>🔗 Ressources à exploiter</h2>
+            <p style="margin-bottom: 25px;">Vous disposez de quatre ressources fondamentales pour votre travail :</p>
+
+            <div class="ressources">
+                <div class="ressource-card">
+                    <h4>🎙️ Podcast</h4>
+                    <p><strong>Mer Baltique : des câbles au cœur des tensions</strong></p>
+                    <p style="margin-top: 10px; font-size: 0.9em;">Épisode du podcast Sur le Fil de l'AFP (podcast original)</p>
+                </div>
+
+                <div class="ressource-card">
+                    <h4>▶️ Vidéo</h4>
+                    <p><strong>Sans ces câbles sous-marins, Internet n'existe plus | C'est Technique</strong></p>
+                    <p style="margin-top: 10px; font-size: 0.9em;">Explore Media - 26 juin 2025 (14 min)</p>
+                </div>
+
+                <div class="ressource-card">
+                    <h4>📰 Article</h4>
+                    <p><strong>Câbles sous-marins : quels enjeux géopolitiques et environnementaux ?</strong></p>
+                    <p style="margin-top: 10px; font-size: 0.9em;">Le bon digital</p>
+                </div>
+
+                <div class="ressource-card">
+                    <h4>🗺️ Carte interactive</h4>
+                    <p><strong>Submarine Cable Map</strong></p>
+                    <p style="margin-top: 10px; font-size: 0.9em;"><a href="https://www.submarinecablemap.com/" target="_blank">www.submarinecablemap.com</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preparation Section -->
+        <div class="section" id="preparation">
+            <h2>📝 Notes de préparation</h2>
+
+            <h3>Points clés à développer</h3>
+
+            <div class="points-cles">
+                <h4>1️⃣ Infrastructure des câbles sous-marins</h4>
+                <ul>
+                    <li>Nombre total de câbles</li>
+                    <li>Longueur totale</li>
+                    <li>Capacité de transmission</li>
+                    <li>Localisation géographique</li>
+                    <li>Profondeur et technologie</li>
+                </ul>
+            </div>
+
+            <div class="points-cles">
+                <h4>2️⃣ Acteurs et contrôle</h4>
+                <ul>
+                    <li>Entreprises de télécommunications</li>
+                    <li>Gouvernements</li>
+                    <li>Tech giants (Google, Meta, Amazon, Microsoft)</li>
+                    <li>Stratégies de déploiement</li>
+                </ul>
+            </div>
+
+            <div class="points-cles">
+                <h4>3️⃣ Vulnérabilités</h4>
+                <ul>
+                    <li>Risques physiques (navires, ancres)</li>
+                    <li>Risques géopolitiques</li>
+                    <li>Sabotage potentiel</li>
+                    <li>Impact sur la connectivité mondiale</li>
+                </ul>
+            </div>
+
+            <div class="points-cles">
+                <h4>4️⃣ Enjeux environnementaux</h4>
+                <ul>
+                    <li>Impact sur la vie marine</li>
+                    <li>Chauffage des océans</li>
+                    <li>Bruit sous-marin</li>
+                    <li>Consommation énergétique</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Conseils Section -->
+        <div class="section" id="conseils">
+            <h2>💡 Conseils pour la présentation</h2>
+            <ul>
+                <li>✅ Utilisez des visuels et des cartes pour illustrer votre propos</li>
+                <li>✅ Structurez votre argument de manière logique et progressive</li>
+                <li>✅ Citez vos sources à chaque affirmation importante</li>
+                <li>✅ Préparez des transitions claires entre les sections</li>
+                <li>✅ Entraînez-vous à rester dans le temps imparti (10 minutes)</li>
+                <li>✅ Soyez prêts à répondre aux questions des auditeurs</li>
+                <li>✅ Utilisez un langage clair et accessible pour un public de lycéens</li>
+                <li>✅ Mettez l'accent sur la croisement des sources plutôt que leur juxtaposition</li>
+            </ul>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p><strong>Crédit pédagogique :</strong> Les enseignants de SNT du lycée Mounier, ANGERS</p>
+            <p>Licence Creative Commons</p>
+        </footer>
     </div>
 </body>
 </html>
